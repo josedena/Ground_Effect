@@ -20,6 +20,8 @@
 \documentclass[twocolumn,10pt]{asme2ej}
 
 \usepackage{graphicx} %% for loading jpg figures
+\usepackage{mathtools}
+\usepackage{moreverb,url}
 
 %% The class has several options
 %  onecolumn/twocolumn - format for one or two columns per page
@@ -33,44 +35,41 @@
 %% The default is oneside, onecolumn, 10pt, final
 
 
-\title{An ASME Journal Article Created Using 
-\LaTeX2\raisebox{-.3ex}{$\epsilon$}
-in ASME Format for Testing Your Figures}
+\title{Experimental Validation for Surface Type Dependency of Ground Effect on Quadrotors}
 
 %%% first author
-\author{Harry H. Cheng
+\author{Alejandro Dena \thanks{j.a.dena-ruiz@cranfield.ac.uk} 
     \affiliation{
-	Professor, Fellow of ASME\\
-	Integration Engineering Laboratory\\
-	Department of Mechanical Engineering\\
-	University of California\\
-	Davis, California 95616\\
-    Email: hhcheng@ucdavis.edu
+        Cranfield University\\
+        Centre for Electronic Warfare,\\ Information and Cyber\\
+        Defence Academy of the United Kingdom\\
+        Shrivenham\\
+        SN6~8LA, UK.
     }	
 }
 
 %%% second author
 %%% remove the following entry for single author papers
 %%% add more entries for additional authors
-\author{J. Michael McCarthy\thanks{Address all correspondence related to ASME style format and figures to this author.} \\
-    \affiliation{ Editor, Fellow of ASME\\
-	Journal of Mechanical Design\\
-        Email: jmmccart@uci.edu
+\author{Kenan Ahiska \\
+    \affiliation{ 
+        Cranfield University\\
+        Centre for Electronic Warfare,\\ Information and Cyber\\
+        Defence Academy of the United Kingdom\\
+        Shrivenham\\
+        SN6~8LA, UK.
     }
 }
 
 %%% third author
 %%% remove the following entry for single author papers
 %%% add more entries for additional authors
-\author{Third Co-author\\
-        Graduate Research Assistan, Student Member of ASME\\
-       {\tensfb Fourth Co-author}\thanks{Address all correspondence for other issues to this author.} 
-    \affiliation{Title, Member of ASME\\
-        Department or Division Name\\
-        Company or College Name\\
-        City, State (spelled out), Zip Code\\
-        Country (only if not U.S.)\\
-        Email address (if available)
+\author{Prof. Nabil Aouf
+    \affiliation{
+        City, University of London\\
+        Northampton Square\\
+        London EC1V 0HB\\
+        United Kingdom\\
     }
 }
 
@@ -81,252 +80,473 @@ in ASME Format for Testing Your Figures}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
-{\it This is the abstract.
-This article illustrates preparation of ASME paper using 
-\LaTeX2\raisebox{-.3ex}{$\epsilon$}.
-An abstract for an ASME paper should be less than 150 words and is normally in italics.
-%%% 
-Please use this template to test how your figures will look on the printed journal page of the Journal of Mechanical Design.  The Journal will no longer publish papers that contain errors in figure resolution.  These usually consist of unreadable or fuzzy text, and pixilation or rasterization of lines.  This template identifies the specifications used by JMD some of which may not be easily duplicated; for example, ASME actually uses Helvetica Condensed Bold, but this is not generally available so for the purpose of this exercise Helvetica is adequate.  However, reproduction of the journal page is not the goal, instead this exercise is to verify the quality of your figures. Notice that this abstract is to be set in 9pt Times Italic, single spaced and right justified.  
+{\it The ground effect is an aerodynamic phenomena which reduces the induced drag on aircraft and thereby increases its lift-to-drag ratio. In the case of aerial vehicles with propellers, the rotor lift force during hover increases when the vehicle flights close to a surface. This paper presents an empirical analysis of this lift force acting on quadrotors with different propeller sizes and hovering over various surface types. A new mathematical model for ground effect which comprises surface type dependency is proposed and verified experimentally. Modelling error is reduced by 14\% in average compared to the most sophisticated ground effect model available in the literature. A ground effect compensator for quadrotor altitude control is introduced to verify the modelling accuracy of the proposed approach. In terms of altitude tracking errors, a 20-80\% improvement is achieved with the proposed model. Furthermore, it is observed that in average the compensator based on the proposed model reduces the control effort by half compared to that attained with previous models.
 }
 \end{abstract}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{nomenclature}
-\entry{A}{You may include nomenclature here.}
-\entry{$\alpha$}{There are two arguments for each entry of the nomemclature environment, the symbol and the definition.}
-\end{nomenclature}
+% \begin{nomenclature}
+% \entry{A}{You may include nomenclature here.}
+% \entry{$\alpha$}{There are two arguments for each entry of the nomemclature environment, the symbol and the definition.}
+% \end{nomenclature}
 
-The primary text heading is  boldface and flushed left with the left margin.  The spacing between the  text and the heading is two line spaces.
+% The primary text heading is  boldface and flushed left with the left margin.  The spacing between the  text and the heading is two line spaces.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 
-This article illustrates preparation of ASME paper using \LaTeX2\raisebox{-.3ex}{$\epsilon$}. The \LaTeX\  macro \verb+asme2ej.cls+, the {\sc Bib}\TeX\ style file \verb+asmems4.bst+, and the template \verb+asme2ej.tex+ that create this article are available on the WWW  at the URL address \verb+http://iel.ucdavis.edu/code/+. To ensure compliance with the 2003 ASME MS4 style guidelines  \cite{asmemanual}, you should modify neither the \LaTeX\ macro \verb+asme2ej.cls+ nor the {\sc Bib}\TeX\ style file \verb+asmems4.bst+. By comparing the output generated by typesetting this file and the \LaTeX2\raisebox{-.3ex}{$\epsilon$} source file, you should find everything you need to help you through the preparation of ASME paper using \LaTeX2\raisebox{-.3ex}{$\epsilon$}. Details on using \LaTeX\ can be found in \cite{latex}. 
+Over the last decade, quadrotors have been one of the most popular Unmanned Aerial Vehicles (UAV), due to their small size and capabilities to hover and reach difficult-to-access areas. Exploration, detection, localisation and surveillance are some of the most common applications for this particular type of UAVs, \cite{Jaimes2008, Lee2017, Alvissalim2012}. Although most of the applications require a stable drone flying at high altitudes, some applications such as landmine detection demand a steady flight and hovering close to the ground. An additional aerodynamic effect due to the proximity to the ground surface or the presence of different objects in close vicinity, namely \textit{the ground effect}, introduces further challenges for the control of the UAV hovering, \cite{Johnson1994}.
 
-In order to get started in generating a two-column version of your paper, please format the document with 0.75in top margin, 1.5in bottom margin and 0.825in left and right margins.  Break the text into two sections one for the title heading, and another for the body of the paper.  
+For helicopters, the ground effect is perceived as an increase on the lift force during hover due to the interaction of the rotor airflow with the ground surface, \cite{Tanner2015}, \cite{Xin1999}. Analogously to the helicopters, for UAVs with a single rotor, ground effect is defined as a factor increasing the lift force. Nevertheless, the available literature regarding ground effect is substantially limited.
 
-The format of the heading is not critical, on the other hand formatting of the body of the text is the primary goal of this exercise.  This will allow you to see that the figures are matched to the column width and font size of the paper.  The double column of the heading section is set to 1.85in for the first column, a 0.5in spacing, and 4.5in for the second column.  For the body of the paper, set it to 3.34in for both columns with 0.17in spacing, both are right justified. 
+The most accepted ground effect model is based on method of images and potential flow, proposed by Cheeseman and Bennet, \cite{Cheeseman1955}. This model accurately predicts the ground effect for helicopters, and for single rotor UAVs at the altitudes lower than two times of the radius of their propeller.
 
-The information that is the focus of this exercise is found in 
-section~\ref{sect_figure}.
-Please use this template to format your paper in a way that is similar to the printed form of the Journal of Mechanical Design.  This will allow you to verify that the size and resolution of your figures match the page layout of the journal.  The ASME Journal of Mechanical Design will no longer publish papers that have the errors demonstrated here.
+In addition to models based on method of images, for single-rotor UAVs, Nonaka et al. proposed curve fitting techniques to describe ground effect, \cite{Nonaka2011}. They used empirical data obtained at different altitudes and identified the coefficients of a second order polynomial by curve fitting on the recordings of voltage applied to the rotor as an indicator to the hover thrust. Their model showed the presence of ground effect at heights up to almost five times the radius of the propeller. %The \textit{ground effect} is an aerodynamic phenomena that occurs on the aforementioned conditions.
 
-ASME simply requires that the font should be the appropriate size and not be blurred or pixilated, and that lines should be the appropriate weight and have minimal, preferably no, pixilation or rasterization.
+For the case of multi-rotors, the model should be defined carefully, since the airflow produced by a rotor is influenced by the other rotors. Matus et.al tested the model in \cite{Cheeseman1955} on a nano quadrotor, and they concluded that the desired behavior can not be approximated with this model, \cite{AMVargas2017}. Therefore, the authors altered the model by replacing the fixed rational constant of radius to altitude, with a parameter $k$ which was estimated from the empirical data with curve fitting techniques. In another study, Danjun et al. modified the model in \cite{Cheeseman1955} and added a new term $\rho$ which was estimated from empirical data acquired at different altitudes for their specific quadrotor with propellers of 15 inches diameter, \cite{Danjun2015}. Their results showed that for their quadrotor, the ground effect is perceived up to an altitude of four times the radius of the propeller, as also described in \cite{Powers2013}.
 
-The journal uses 10pt Times Roman Bold for headings, but Times Bold is good enough for this effort.  The text is set at 9pt Times Roman, and again Times will be fine.  Insert a new line after the heading, and two lines after each section.  This is not exactly right but it is close enough.
+The model in \cite{Cheeseman1955} was also expanded by Sanchez-Cuevas et al.\cite{Sanchez-Cuevas2017}, from a single rotor to a quadrotor by adding a term to be tuned with empirical data to achieve a better ground effect estimate. This model showed that the ground effect for multi-rotors is significant for distances up to five times the propeller radius. In another study, D. Bernard et al. used a second order polynomial and least square estimates for determining the coefficients of the polynomial, to represent the ground effect for a single rotor from its thrust response, using an special test bench, \cite{Bernard2017}. They then extended their method to generalize their model to four rotors.
 
+There is also a very particular study on an unusual type of multirotors: the Draganflyer X8, \cite{Sharf2014}. This UAV is actuated by 8 propellers arranged in 4 coaxial pairs in a cross structure configuration. The authors compared the model in \cite{Cheeseman1955} and their proposed model, which uses curve fitting on a second order polynomial. 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Very Very Very Very Very Very Very Very Very Very Very Long Heading}
+Accurate modeling of ground effect is important for quadrotor control since various studies prove that ground effect has an impact on the stability of the quadrotors. For example, in \cite{Davis2016}, Davis et al. worked on the stability of a quadrotor with canted rotors in a sloped channel and showed that increasing the rotor's cant produces bigger damping, whereas changing the channel slope results in a higher position feedback, which should be taken into consideration in controller design. Furthermore, the impact of ground effect on the roll and pitch stability of a quadrotor as a function of its altitude was studied in frequency domain, by S. Aich et al., in \cite{Aich2014}. 
 
-The heading is boldface with upper and lower case letters. 
-If the heading should run into more than one line, the run-over is not left-flushed.
+Ground effect introduces significant issues in control applications, \cite{Bartholomew2015}. In his study, Bartholomew demonstrated a technique to improve flight control of micro aerial vehicles that experience aerodynamic disturbances caused by objects in their flight path. A robust altitude control with ground effect compensation for a small RC helicopter is also proposed in \cite{Nonaka2011}. As an alternative to the altitude measurement, for ground effect compensation, visual feedback can be used to estimate external disturbances on a quadrotor, as in the work of Rayan et al. \cite{Ryan2012}.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Second-Level Heading}
+In \cite{Nobahari2014}, another model for ground effect is proposed, based in the model founded in \cite{Hayden1976}. The based model in Nobahari's work, is an extension of the model proposed by Hayden, considering the addition of the distance from the quadrotor's center of mass to the propellers $R_{eq}$. This study is oriented to the ground effect compensation for landing operations and the altitude state estimation. 
 
-The next level of heading is also boldface with upper and lower case letters. 
-The heading is flushed left with the left margin. The spacing to the next heading is two line spaces.
+The limited literature on ground effect hardly  approximates it as a function of altitude for different rotor sizes. It is also observed that surface type is not even considered as a factor in ground effect modelling. In this study, we demonstrated though extensive experiments (at 13 different altitudes, with 3 different rotor sizes and over 4 different surface types) that ground effect depends on surface type as well. In this paper, this phenomena is introduced and a surface type dependent ground effect model is proposed. According to the analysis on experimental data, it is observed that the proposed model generates smaller modelling errors compared to the other models available in the literature. Furthermore, a ground effect compensated controller design is implemented and the improvement in the reference tracking performance. 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Third-Level Heading.}
+The structure of this paper is as follows: in Section II, a mathematical model for a quadrotor is introduced. Section III explains the ground effect phenomena and the models available in the literature. In Section IV, our experimental setup is demonstrated and the accuracies of the available ground effect models are assessed in comparisons with the experimental data. In Section V, surface type dependent ground effect model is proposed  and the improvement achieved in the modelling accuracy is demonstrated. Finally, section VI presents the controller design for quadrotors including the ground effect compensation and the reduction in the controller effort are presented as further verification tests for the proposed model.
 
-The third-level of heading follows the style of the second-level heading.
+\section{Quadrotor Model}\label{quad_model_section}
+A mathematical model for quadrotors is defined based on Newton-Euler equations, \cite{GarciaCarrillo2013} \cite{Bouabdallah2005}. In order to eliminate unnecessary complexity, the quadrotor is assumed to be symmetric and rigid. The reference frames and key variables are presented in Fig. \ref{quad_frames}, where $\mathcal{F}_{I}$ represents the inertial frame fixed at a point on the ground and with its $z$ axis pointing upwards, the $x$ and $y$ axes can be chosen following the right hand convention. $\mathcal{F}_{B}$ represents the body frame, with its coordinate axes aligned with $\mathcal{F}_{I}$ and its origin is at the center of gravity of the quadrotor, which is assumed to coincide with its geometric centre. Also each propeller have a rotational velocity $\Omega_{i}$ with $i=1:4$, $\Omega_{1}$ and $\Omega_{2}$ are in counter-clockwise direction, whilst $\Omega_{3}$ and $\Omega_{4}$ are in the clockwise direction.
 
+Using Newton's laws of mechanics and Euler's dynamics, the model consists of six equations for the system dynamics and four equations to describe the inputs, as shown in Eqn.\eqref{model_1}-\eqref{model_6}, where $m$ is the total quadrotor mass, Eqn.\eqref{model_1} - \eqref{model_3} describe the linear accelerations defined in the $\mathcal{F}_{I}$, while Eqn.\eqref{model_4} - \eqref{model_6} represent the angular accelerations about the centre of gravity of the vehicle in $\mathcal{F}_{B}$. $l$ corresponds to the arm length holding the propeller, $\phi$, $\theta$ and $\psi$ represent the Euler angles. $I_{xx}$, $I_{yy}$ and $I_{zz}$ are the body inertial components, and $J_{r}$ and $\Omega$ are the rotor inertia and rotor speed, respectively. $U_{1}$, $U_{2}$, $U_{3}$ and $U_{4}$ represent the control inputs, as well as total force provided by the four rotors, and the torques in each of the rotation axis. These last four variables will be the system inputs, and are related to the propeller speeds as described in Eqn. \eqref{model_7}-\eqref{model_11}. 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Use of SI Units}
-
-An ASME paper should use SI units.  When preference is given to SI units, the U.S. customary units may be given in parentheses or omitted. When U.S. customary units are given preference, the SI equivalent {\em shall} be provided in parentheses or in a supplementary table. 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Footnotes\protect\footnotemark}
-\footnotetext{Examine the input file, asme2ej.tex, to see how a footnote is given in a head.}
-
-Footnotes are referenced with superscript numerals and are numbered consecutively from 1 to the end of the paper\footnote{Avoid footnotes if at all possible.}. Footnotes should appear at the bottom of the column in which they are referenced.
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Mathematics}
-
-Equations should be numbered consecutively beginning with (1) to the end of the paper, including any appendices.  The number should be enclosed in parentheses and set flush right in the column on the same line as the equation.  An extra line of space should be left above and below a displayed equation or formula. \LaTeX\ can automatically keep track of equation numbers in the paper and format almost any equation imaginable. An example is shown in Eqn.~(\ref{eq_ASME}). The number of a referenced equation in the text should be preceded by Eqn.\ unless the reference starts a sentence in which case Eqn.\ should be expanded to Equation.
-
-\begin{equation}
-f(t) = \int_{0_+}^t F(t) dt + \frac{d g(t)}{d t}
-\label{eq_ASME}
-\end{equation}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Figures}
-\label{sect_figure}
-
-All figures should be positioned at the top of the page where possible.  All figures should be numbered consecutively and centered under the figure as shown in Fig.~\ref{figure_ASME}. All text within the figure should be no smaller than 7~pt. There should be a minimum two line spaces between figures and text. The number of a referenced figure or table in the text should be preceded by Fig.\ or Tab.\ respectively unless the reference starts a sentence in which case Fig.\ or Tab.\ should be expanded to Figure or Table.
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%% begin figure %%%%%%%%%%%%%%%%%%%
 \begin{figure}[t]
-\begin{center}
-\setlength{\unitlength}{0.012500in}%
-\begin{picture}(115,35)(255,545)
-\thicklines
-\put(255,545){\framebox(115,35){}}
-\put(275,560){Beautiful Figure}
-\end{picture}
-\end{center}
-\caption{The caption of a single sentence does not have period at the end}
-\label{figure_ASME} 
+    \begin{center}
+    \setlength{\unitlength}{0.012500in}%
+    \includegraphics[width=8.5cm, height=6cm]{Images/quad_frames.png}
+    \end{center}
+    \caption{Body and Inertial frames}
+    \label{quad_frames} 
 \end{figure}
 %%%%%%%%%%%%%%%% end figure %%%%%%%%%%%%%%%%%%% 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In the following subsections, I have inserted figures that have been provided by authors in order to demonstrate what to avoid.  In each case the authors provided figures that are 3.25in wide and 600dpi in the .tif graphics format.  The papers containing these figures have been held from production due to their poor quality. 
+\begin{align}
+    \ddot{X}      &= (\cos\phi\sin\theta\cos\psi + \sin\phi\sin\psi)\frac{1}{m}U_{1} \label{model_1}\\
+    \ddot{Y}      &= (\cos\phi\sin\theta\sin\psi - \sin\phi\cos\psi)\frac{1}{m}U_{1}  \label{model_2}\\
+    \ddot{Z}      &= (\cos\phi\cos\theta)\frac{1}{m}U_{1} - g \label{model_3}\\ 
+    \ddot{\phi}   &= \dot{\theta}\dot{\psi}(\frac{I_{yy}-I_{zz}}{I_{xx}})-\frac{J_{r}}{I_{xx}}\dot{\theta}\Omega+\frac{l}{I_{xx}}U_{2}\label{model_4}\\
+    \ddot{\theta} &= \dot{\phi}\dot{\psi}(\frac{I_{zz}-I_{xx}}{I_{yy}})+\frac{J_{r}}{I_{yy}}\dot{\phi}\Omega+\frac{l}{I_{yy}}U_{3} \label{model_5}\\
+    \ddot{\psi}   &= \dot{\phi}\dot{\theta}(\frac{I_{xx}-I_{yy}}{I_{zz}})+\frac{U_{4}}{I_{zz}} \label{model_6}\\
+    U_{1}  &= b_{f}(\Omega_{1}^{2} + \Omega_{2}^{2} + \Omega_{3}^{2} + \Omega_{4}^{2}) \label{model_7}\\ 
+    U_{2}  &= b_{f}l(\Omega_{2}^{2} + \Omega_{4}^{2}) \label{model_8} \\
+    U_{3}  &= b_{f}l(\Omega_{3}^{2} + \Omega_{1}^{2}) \label{model_9} \\
+    U_{4}  &= d_{f}(\Omega_{1}^{2} + \Omega_{3}^{2} - \Omega_{2}^{2} - \Omega_{4}^{2}) \label{model_10} \\
+    \Omega &= \Omega_{1}^{2} + \Omega_{3}^{2} + \Omega_{2}^{2} + \Omega_{4}^{2} \label{model_11}
+\end{align}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{The 1st Example of Bad Figure}
+where $b_{f}$ is positive constant which denotes the thrust factor of a propeller, $l$ is the distance from one of the rotors to the center of gravity and $d_{f}$ is the drag factor.
 
-%%%%%%%%%%%%%%%% begin figure %%%%%%%%%%%%%%%%%%%
-%%% 3.34in is the maximum width you can have for a figure
-\begin{figure} 
-\centerline{\includegraphics[width=3.34in]{figure/FMANU_MD_05_1107_11.jpg}}
-\caption{Example taken from a paper that was held from production because the image quality is poor.  ASME sets figures captions in 8pt, Helvetica Bold.}
-\label{fig_example1.jpg}
+\section{Defining The Ground Effect} 
+It is well known that aerial vehicles with rotors tend to experience some aerodynamic effects as they fly close to surfaces or objects. The aerodynamic effect produced by the interaction between the ground surface and the aerial vehicles is called \textit{ground effect} and it alters the total vehicle thrust.
+
+For helicopters, this phenomena increases the total thrust when hovering close to the ground, due to the air pressure accumulating between the rotor propeller and the ground surface. The widely used ground effect model is based on potential flow and the method of images, proposed by Cheeseman \& Bennet, \cite{Cheeseman1955}. In this model, the ground effect is represented in the form of a thrust force as a function of the propeller radius and the distance from the propeller to the ground surface, as given in Eqn.\eqref{chessman}. Here $T_{IGE}$ and ${T_{OGE}}$ refer to the thrust force while hovering in the ground effect and out of this region, respectively. $R$ is the propeller radius and $z$ is the altitude of the vehicle.
+
+\begin{equation}
+\frac{T_{IGE}}{T_{OGE}} = \frac{1}{1-(\frac{R}{4z})^{2}} \label{chessman}
+\end{equation}
+
+For the case of multirotors, the ground effect becomes complex due to the aerodynamic interaction between a rotor and its neighboring rotors. For multirotors, Danjun et.al proposed a ground effect model based on Eqn.\eqref{chessman} which modifies this equation and adds a $\rho$ coefficient, estimated from the experimental data at different heights using a least square approximation, \cite{Danjun2015}. As given in Eqn.\eqref{danjun}, this model was applied to a quadrotor, and the results prove the existence of ground effect up to altitudes $z/R = 4$.
+
+\begin{equation}
+\frac{T_{IGE}}{T_{OGE}} = 1-\rho(\frac{R}{4z)^{2}}  \label{danjun}
+\end{equation}
+
+Another extension of the model in Eqn.\eqref{chessman} for multirotors uses potential flow and the method of images applied to a quadrotor \cite{Sanchez-Cuevas2017}, is presented in Eqn.\eqref{sanchez-cuevas_1}. Here $d$ represents the separation from each rotor axis to its adjacent rotor axes, R is the radius of the rotor and $z$ is the vertical distance of the rotor to the ground.
+
+\begin{align}
+  \frac{T_{IGE}}{T_{OGE}} = \frac{1}{\splitfrac{1 - (\frac{R}{4z})^{2} - R^{2}(\frac{z}{\sqrt{(d^{2}+4z^{2})^{3}}})} 
+  {- (\frac{R^{2}}{2})(\frac{z}{\sqrt{(2d^{2}+4z^{2})^{3}}})}}  \label{sanchez-cuevas_1} 
+\end{align}
+
+Using empirical measurements, it is observed that the model in Eqn.\eqref{sanchez-cuevas_1} gives a considerable accurate representation of the ground effect for quadrotors. Nevertheless, some residuals between the model and the empirical data remain, \cite{Sanchez-Cuevas2017}. In the most recent improvement in ground effect model, a new parameter $b$ that represents the distance between the two opposite rotor axes (diagonal) was introduced to the model, and an additional term to compensate this difference was added to Eqn.\eqref{sanchez-cuevas_1}. This model, given in Eqn.\eqref{sanchez-cuevas_2}, includes the so-called \textit{"the body lift coefficient"} represented by the $k_{b}$, a positive term that can be identified by fitting the model to the empirical data.
+
+\begin{align}
+  \frac{T_{IGE}}{T_{OGE}} = \frac{1}{\splitfrac{1 - (\frac{R}{4z})^{2} - R^{2}(\frac{z}{\sqrt{(d^{2}+4z^{2})^{3}}})} {- (\frac{R^{2}}{2})(\frac{z}{\sqrt{(2d^{2}+4z^{2})^{3}}}) - 2R^{2}(\frac{z}{\sqrt{(b^{2}+4z^{2})^{3}}}k_{b})}}  \label{sanchez-cuevas_2}
+\end{align}
+
+\section{Initial experimental analysis and assessment}
+The modeling performances of the aforementioned proposals are experimentally evaluated. However, there is no standard experimental setup for testing the ground effect. In \cite{Sanchez-Cuevas2017}, the experiments were conducted on a special test bench, where the quadrotor was placed at different heights and force sensors were used to measure the thrust for each rotor separately. On the other hand, in \cite{Bernard2017}, as an experimental setup, the quadrotor was rigidly attached to a testbed that allows changes in the height from the ground, and a 6 DoF load cell was used to measure the total force at each height. Note that both of these experimental setups constrain the motion of UAV and hence they lack accuracy in modeling the ground effect during a free flight.
+
+\subsection{Experimental setup}
+In this study, the experiments are conducted in a controlled environment in our laboratory. The environment is wind-free and also equipped with precise position measuring tools such as the OptiTrack system \cite{Optitrack}, allowing to execute experiments whit the quadrotor in free flight and with no attachments. Fig. \ref{Arena} shows the layout of the used arena. The box area in the middle is changed during tests with different surface types.
+
+\begin{figure}[t]
+  \begin{center}
+  \setlength{\unitlength}{0.012500in}%
+  \includegraphics[width=8.5cm, height=6cm]{Images/arena.eps}
+  \end{center}
+  \caption{Arena where experiments were performed}
+  \label{Arena}
 \end{figure}
-%%%%%%%%%%%%%%%% end figure %%%%%%%%%%%%%%%%%%%
 
-In order to place the figure in this template using MSWord, select Insert Picture from File, and use wrapping that is top and bottom. Make sure the figure is 3.25in wide.
- 
-Figure~`\ref{fig_example1.jpg}
-was taken from a recent paper that was held from publication, because the text is fuzzy and unreadable. It was probably obtained by taking a screen shot of the computer output of the authors software. This means the original figure was 72dpi (dots per inch) on a computer screen. There is no way to improve the quality such a low resolution figure.
- 
-In order to understand how poor the quality of this figure is, please zoom in slightly, say to 200\%.  Notice that while the font of the paper is clear at this size, the font in the figures is fuzzy and blurred.  It is impossible to make out the small symbol beside the numbers along the abscissa of the graph.  Now consider the labels Time and Cost. They are clearly in fonts larger that the text of the article, yet the pixilation or rasterization, associated with low resolution is obvious. This figure must be regenerated at higher resolution to ensure quality presentation.
+The distance from the ground to the ceiling is 3 m. Only 3 walls are shown on the schematic in Fig. \ref{Arena}, and the downside wall in the figure is 5 m away. Note that the maximum altitude during the experiments is 1 m; hence, effects due to the ceiling and the downside wall are neglected. 
 
-The poor quality of this figure is immediately obvious on the printed page, and reduces the impact of the research contribution of the paper, and in fact detracts from the perceived quality of the journal itself.
+The Pelican quadrotor from AscTec (Ascending Technologies)\cite{AscTec} is chosen as the prototype to develop the experiments. Its physical structure is made of carbon fibre, and its well distributed sensors and components make it a reliable platform for research purposes. This quadrotor offers plenty of space and various interfaces for individual components and payloads, see Fig. \ref{Pelican}.
 
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{The 2nd Example of Bad Figure}
-
-%%%%%%%%%%%%%%%% begin figure %%%%%%%%%%%%%%%%%%%
-\begin{figure} 
-\centerline{\includegraphics[width=3.34in]{figure/FMANU_MD_05_1272_5.jpg}}
-\caption{While this figures is easily readable at a double column width of 6.5in, when it is shrunk to 3.25in column width the text is unreadable. This paper was held from production.}
-\label{fig_example2.jpg}
+\begin{figure}[t]
+    \begin{center}
+        \setlength{\unitlength}{0.012500in}%
+        \includegraphics[width=8.5cm, height=6cm]{Images/Pelican.eps}
+    \end{center}
+    \caption{Quadrotor AscTec Pelican with autopilot and mastermind}
+    \label{Pelican}
 \end{figure}
-%%%%%%%%%%%%%%%% end figure %%%%%%%%%%%%%%%%%%%
 
-Figure~\ref{fig_example2.jpg}
-demonstrates a common problem that arises when a figure is scaled down fit a single column width of 3.25in.  The original figure had labels that were readable at full size, but become unreadable when scaled to half size.  This figure also suffers from poor resolution as is seen in the jagged lines the ovals that form the chain.
+Detailed information regarding the quadrotor setup can be found in our previous work, in \cite{DenaRuiz2017}. Three different size of propellers as shown in Fig. \ref{props}, are used during the experiments to understand the dependency of the ground effect on different propeller sizes. Table \ref{props_params} shows the related parameters for the propellers that are used in experiments; their thrust coefficients and the total drone mass for each size. The Pitch angle or blade pitch refers to the turning angle of attack of the blades of a propeller or helicopter rotor.
 
-This problem can be addressed by increasing the size of the figure to a double column width of 6.5in, so the text is readable.  But this will not improve the line pixilation, and a large low resolution figure is less desirable than a small one.  This also significantly expands the length of the paper, and may cause it to exceed the JMD nine page limit.  Additional pages require page charges of \$200 per page.  It is best to regenerate the figure at the resolution that ensures a quality presentation.
+\begin{figure}[t]
+    \begin{center}
+        \setlength{\unitlength}{0.012500in}%
+        \includegraphics[width=8.5cm, height=6cm]{Images/props.eps}
+    \end{center}
+    \caption{Three different propellers used in the experiments}
+    \label{props}
+\end{figure} 
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{The 3rd Example of Bad Figure}
-%%%%%%%%%%%%%%%% begin figure %%%%%%%%%%%%%%%%%%%
-\begin{figure} 
-\centerline{\includegraphics[width=3.25in]{figure/FMANU_MD_04_1274_13.jpg}}
-\caption{Another example of a figure with unreadable text.  Even when the paper was expanded to double column width the text as shown in Fig.~\ref{fig_example4.jpg} was of such low quality that the paper was held from production.}
-\label{fig_example3.jpg}
-\end{figure}
-%%%%%%%%%%%%%%%% end figure %%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%% begin figure %%%%%%%%%%%%%%%%%%%
-%%% the maximum width in double column is 6.85in
-\begin{figure*} 
-\centerline{\includegraphics[width=6.85in]{figure/FMANU_MD_04_1274_13.jpg}}
-\caption{A figure expanded to double column width the text from Figure~\ref{fig_example3.jpg}}
-\label{fig_example4.jpg}
-\end{figure*}
-%%%%%%%%%%%%%%%% end figure %%%%%%%%%%%%%%%%%%%
-An author provided the high resolution image 
-in Fig.~\ref{fig_example3.jpg}
-that was sized to a single column width of 3.25in.  Upon seeing the poor quality of the text, the publisher scaled the image to double column width as shown in Fig.~\ref{fig_example4.jpg} 
-at which point it took half of a page.  The publisher went on to do this for all eight figures generating four pages of figures that the author did not expect. ASME stopped production of the paper even with the larger figures due to the pixilation of the font.
-
-Clearly the text in this figure is unreadable, and it is doubtful that the author can print the output in a way that it is readable.  This is a problem that the author must solve, not the publisher. 
-
-As you might expect, I have many more examples, but in the end the author is the best judge of what is needed in each figure.  ASME simply requires that the image meet a minimum standard for font and line quality, specifically the font should be the appropriate size and not be blurred or pixilated, and that lines should be the appropriate weight and have minimal, preferably no, pixilation or rasterization.
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Tables}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%% begin table   %%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}[t]
-\caption{Figure and table captions do not end with a period}
-\begin{center}
-\label{table_ASME}
-\begin{tabular}{c l l}
-& & \\ % put some space after the caption
-\hline
-Example & Time & Cost \\
-\hline
-1 & 12.5 & \$1,000 \\
-2 & 24 & \$2,000 \\
-\hline
-\end{tabular}
-\end{center}
+    \small
+    \caption{Propeller characteristics and their thrust coefficients}
+    \begin{center}
+    \label{props_params}
+    \scalebox{0.8}{
+    \begin{tabular}{c c c c c}
+    & & & &\\ % put some space after the caption
+    \hline
+    Propeller & Radius(\textit{inch}) & Pitch(\textit{inch}) & Thrust Coef($b_{f}$) & Quadrotor's \\
+    &                       &                      &                  & Mass($kg$)\\
+    \hline
+    APC 0947 & 4.5 & 4.7 & $8.20\times10^{-6}$ & 1.501\\
+    APC 1047 & 5.0 & 4.7 & $1.49\times10^{-5}$ & 1.518\\
+    APC 1147 & 5.5 & 4.7 & $1.81\times10^{-5}$ & 1.524\\
+    \hline
+    \end{tabular}}
+    \end{center}
 \end{table}
 %%%%%%%%%%%%%%%% end table %%%%%%%%%%%%%%%%%%% 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-All tables should be numbered consecutively  and centered above the table as shown in Table~\ref{table_ASME}. The body of the table should be no smaller than 7 pt.  There should be a minimum two line spaces between tables and text.
+The communication framework of the experimental setup is presented by the block diagram in Fig. \ref{comm_block_diagram}. All the communications between the ground station computer and the quadrotor are preformed through a WiFi network using ROS (Robot Operating System). The quadrotor position is obtained from Optitrack \cite{Optitrack} at 120 Hz. Individual ROS packages running on the quadrotor's onboard computer and the ground station perform the full control of the UAV and save the real time data during flight.
 
+\begin{figure}[t]
+    \begin{center}
+        \setlength{\unitlength}{0.012500in}%
+        \includegraphics[width=8.5cm, height=4cm]{Images/block_diagram.eps}
+    \end{center}
+    \caption{Communication block diagram}
+    \label{comm_block_diagram}
+\end{figure}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Citing References}
+A total of four surface types are selected to perform the experiments: turf, dry soil, irregular dry soil, and dirt as shown in Fig. \ref{surface_types}.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The ASME reference format is defined in the authors kit provided by the ASME.  The format is:
+\begin{figure}[t]
+    \begin{center}
+        \setlength{\unitlength}{0.012500in}%
+        \includegraphics[width=8.5cm, height=6cm]{Images/surface_types.eps}
+    \end{center}
+    \caption{Four surface types: dirt on the top left, dry soil on the top right, irregular dry soil on the bottom left, and turf on the bottom right}
+    \label{surface_types}
+\end{figure}
 
-\begin{quotation}
-{\em Text Citation}. Within the text, references should be cited in  numerical order according to their order of appearance.  The numbered reference citation should be enclosed in brackets.
-\end{quotation}
+The experiments are performed by hovering the quadrotor at 13 different heights: 1.0, 0.9, 0.8, 0.7, 0.6, 0.55, 0.5, 0.45, 0.4, 0.35, 0.3, 0.25, and 0.21 m. Here, the height represent the distance from the propellers to the ground surface, having the minimum value of 21 cm when the quadrotor is on the surface. An average of 500 samples (7 seconds) for each system variable are recorded at each height in real-tme.
 
-The references must appear in the paper in the order that they were cited.  In addition, multiple citations (3 or more in the same brackets) must appear as a `` [1-3]''.  A complete definition of the ASME reference format can be found in the  ASME manual \cite{asmemanual}.
+In order to get an estimation of the ground effect force, it is assumed that this force is proportional to the total force ($f_{T}$). Solving equations Eqn.\eqref{chessman} to Eqn.\eqref{sanchez-cuevas_2} for $T_{IGE}$ and adding this term to Eqn.\eqref{model_3}, yields to Eqn.\eqref{accZ_GE} and Eqn.\eqref{ge_force}.
 
-The bibliography style required by the ASME is unsorted with entries appearing in the order in which the citations appear. If that were the only specification, the standard {\sc Bib}\TeX\ unsrt bibliography style could be used. Unfortunately, the bibliography style required by the ASME has additional requirements (last name followed by first name, periodical volume in boldface, periodical number inside parentheses, etc.) that are not part of the unsrt style. Therefore, to get ASME bibliography formatting, you must use the \verb+asmems4.bst+ bibliography style file with {\sc Bib}\TeX. This file is not part of the standard BibTeX distribution so you'll need to place the file someplace where LaTeX can find it (one possibility is in the same location as the file being typeset).
+\begin{align}
+  \ddot{Z} &= (\cos\phi\cos\theta)\frac{1}{m}f_{T}T_{IGE} - g \label{accZ_GE}\\
+  T_{IGE}       &= \frac{m(\ddot{Z} + g)}{\cos\phi\cos\theta f_{T}} \label{ge_force}
+\end{align}
 
-With \LaTeX/{\sc Bib}\TeX, \LaTeX\ uses the citation format set by the class file and writes the citation information into the .aux file associated with the \LaTeX\ source. {\sc Bib}\TeX\ reads the .aux file and matches the citations to the entries in the bibliographic data base file specified in the \LaTeX\ source file by the \verb+\bibliography+ command. {\sc Bib}\TeX\ then writes the bibliography in accordance with the rules in the bibliography .bst style file to a .bbl file which \LaTeX\ merges with the source text.  A good description of the use of {\sc Bib}\TeX\ can be found in \cite{latex, goosens} (see how two references are handled?).  The following is an example of how three or more references \cite{latex, asmemanual,  goosens} show up using the \verb+asmems4.bst+ bibliography style file in conjunction with the \verb+asme2ej.cls+ class file. Here are some more \cite{art, blt, ibk, icn, ips, mts, mis, pro, pts, trt, upd} which can be used to describe almost any sort of reference.
+\subsection{Experimental comparison of the available ground effect models}
+In this section, the modelling performance of the available ground effect models are compared against the experimental data. For future reference the models Eqn.\eqref{chessman}, Eqn.\eqref{danjun}, Eqn.\eqref{sanchez-cuevas_1} and Eqn.\eqref{sanchez-cuevas_2} are named as M1, M2, M3, and M4, respectively. Also, $z$ has been defined in section \ref{quad_model_section} as the quadrotor altitude, for the following experiments, $z$ will be considered as the vertical distance from the ground to the rotor propellers. Experimental data for three propeller sizes over four different surface types are collected, and these twelve data sets are employed in this comparison. Note that models M2 and M4 require estimation of the coefficients $\rho$ and $k_{b}$ respectively. These values are calculated by non-linear curve fitting to the experimental data as $\rho = 3.6490$ and $k_{b} = 0.4509$.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[t]
+    \begin{center}
+        \setlength{\unitlength}{0.012500in}%
+        \includegraphics[width=8.5cm, height=7cm]{Images/r1sx.png}
+    \end{center}
+  \caption{Comparison of the four existent models vs experimental data from the four surfaces with R = 0.1143 m}
+  \label{r1sx_plot}
+\end{figure}
+
+\begin{figure}[t]
+    \begin{center}
+        \setlength{\unitlength}{0.012500in}%
+        \includegraphics[width=8.5cm, height=7cm]{Images/r2sx.png}
+    \end{center}
+  \caption{Comparison of the four existent models vs experimental data from the four surfaces with R = 0.127 m}
+  \label{r2sx_plot}
+\end{figure}
+
+\begin{figure}[t]
+    \begin{center}
+        \setlength{\unitlength}{0.012500in}%
+        \includegraphics[width=8.5cm, height=7cm]{Images/r3sx.png}
+    \end{center}
+  \caption{Comparison of the four existent models vs experimental data from the four surfaces with R = 0.1397 m}
+  \label{r3sx_plot}
+\end{figure}
+
+\begin{figure}[t]
+    \begin{center}
+        \setlength{\unitlength}{0.012500in}%
+        \includegraphics[width=8.5cm, height=8cm]{Images/errors_triangles.eps}
+    \end{center}
+  \caption{Error comparison between the existent models and the propeller sizes}
+  \label{error_comp_r123}
+\end{figure}
+
+\begin{table}[!ht]
+  \small\sf\centering
+  \caption{Errors between the existent models and propeller sizes.}
+  \scalebox{0.9}{
+  \begin{tabular}{c c c c c}
+    & & & &\\ % put some space after the caption
+    \hline
+    Radii/Model  & M1 & M2 & M3 & M4\\
+    \hline
+    R1 & 0.017958 & 0.007388	& 0.007244	& 0.004586\\
+    R2 & 0.019702 & 0.006084	& 0.007411	& 0.004908\\
+    R3 & 0.027704 & 0.009941	& 0.01283	  & 0.006845\\
+    \hline
+  \end{tabular}}
+  \label{props_errors}
+\end{table}
+
+Fig. \ref{r1sx_plot}, Fig. \ref{r2sx_plot} and Fig. \ref{r3sx_plot} and Table \ref{props_errors} show the ratio performance $T_{IGE}/T_{OGE}$ against $z/R$, which denotes the distance from the ground to the rotor propellers in terms of the propeller's radii size. The bars on the experimental data indicate the standard deviations of the samples from their mean values. The modelling error in Eqn.\eqref{errors_} is calculated as the absolute sum of the distances between the model prediction and the mean of the experimental data ($\mu_{data}$), at a certain height index $n$ and for the total number of points per height $n$, $d_{np}(n)$. It is observed that M4 exhibits the smallest error among the different models in the literature. Hence, M4 will be used as the reference model for the rest of this paper.
+
+\begin{align}
+  \mu_{error} &=  M4(n) - \mu_{data}(n) \label{error_mean} \\ 
+  error &= \frac{ \sum_{n=1}^{n=13} d_{np}(n) \mu_{error}(n) }{\sum d_{np}(n)} \label{errors_}
+\end{align}
+
+\section{Surface dependent ground effect model}
+In this section, surface dependency of the ground effect is investigated. M4 is compared against the experimental data for each surface types separately in Fig. \ref{r1_sx_c_plot}, Fig. \ref{r2_sx_c_plot} and Fig. \ref{r3_sx_c_plot}. Fig. \ref{r1_sx_c_plot} shows this comparison for $R=0.1143$ m, and it is observed that M4 fits the samples for the dry soil surface best with an error of 0.003175 m, but the error starts increasing significantly for the other surface types. Fig. \ref{r2_sx_c_plot} and Fig. \ref{r3_sx_c_plot} show results for other two propeller radii. The curves show that experimental data for different surfaces spread from each other as the radius decreases. The error values are given in Table \ref{props_surface_m4_errors} and Figure \ref{error_comp_r123}.
+
+\begin{figure}[t]
+  \begin{center}
+  \setlength{\unitlength}{0.012500in}%
+  \includegraphics[width=8.5cm, height=7cm]{Images/r1_surface_comp.png}
+  \caption{Comparison of M4 vs experimental data from each surface, using R = 0.1143 m}
+  \end{center}
+  \label{r1_sx_c_plot}
+\end{figure}
+
+\begin{figure}[t]
+  \begin{center}
+  \setlength{\unitlength}{0.012500in}%
+  \includegraphics[width=8.5cm, height=7cm]{Images/r2_surface_comp.png}
+  \caption{Comparison of M4 vs experimental data from each surface, using R = 0.127 m}
+  \end{center}
+  \label{r2_sx_c_plot}
+\end{figure}
+
+\begin{figure}[t]
+  \begin{center}
+  \setlength{\unitlength}{0.012500in}%
+  \includegraphics[width=8.5cm, height=7cm]{Images/r3_surface_comp.png}
+  \caption{Comparison of M4 vs experimental data from each surface, using R = 0.1397 m}
+  \end{center}
+  \label{r3_sx_c_plot}
+\end{figure}
+
+\begin{table}[!b]
+  \small\sf\centering
+  \caption{Error comparison between M4 and the data samples for each surface type for the 3 propeller radii.}
+  \scalebox{0.8}{
+  \begin{tabular}{c c c c}
+   & & &\\ % put some space after the caption
+  \hline
+  Surface & R1 (0.1143 m) & R2 (0.127 m) & R3 (0.1397 m) \\
+  \hline
+  Turf               & 0.009234          & \textbf{0.004585} & 0.009845\\
+  Dirt               & 0.006337          & 0.007250          & 0.006478\\
+  Irregular Dry Soil & 0.003521          & 0.008313          & 0.006355\\
+  Dry Soil           & \textbf{0.003175} & 0.005870          & \textbf{0.005729}\\
+  \hline
+  \end{tabular}}
+  \label{props_surface_m4_errors}
+\end{table}
+
+Based on Fig. \ref{r1_sx_c_plot}, Fig. \ref{r2_sx_c_plot} and Fig. \ref{r3_sx_c_plot}, it is evident that the modelling assumption of M4 cannot be valid for different surface types. Hence, an improvement on M4 is necessary to handle different surface types. In this paper, we propose the following innovative model, PM, for ground effect:
+
+\begin{align}
+  \frac{T_{IGE}}{T_{OGE}} = \frac{1}{\splitfrac{1 - (\frac{R}{4z})^{2} - R^{2}(\frac{z}{\sqrt{(d^{2}+4z^{2})^{3}}})} {\splitfrac{- (\frac{R^{2}}{2})(\frac{z}{\sqrt{(2d^{2}+4z^{2})^{3}}}) - 2R^{2}(\frac{z}{\sqrt{(b^{2}+4z^{2})^{3}}}k_{b})}{- 2R^{2}(\frac{z}{\sqrt{(b^{2}+4z^{2})^{3}}}k_{s})}}}  \label{sanchez-cuevas_3}
+\end{align}
+
+In this equation, in addition to the body lift coefficient $k_{b}$, introduced in Eqn.\eqref{sanchez-cuevas_2}, an empirical surface type dependent lift coefficient $k_{s}$ is considered, which is a positive value. Next to this, the new term uses the velocity of the air at the central point of the body as implemented by \cite{Sanchez-Cuevas2017} in Eqn.\eqref{sanchez-cuevas_2}.
+The ground effect results for R=0.1143m, as an example, are shown in Fig. \ref{rxsx_ind_kb}. It is observed that the modelling error is dramatically reduced. For all surface types and propeller radii, modelling errors of M4 and PM are presented in Table \ref{props_surface_PM_errors}. The results show that the modelling errors can be reduced by at least 1.60\%, in average by 13.7\% and up to 56.82\% with the proposed model.
+
+\begin{figure*}[t]
+  \begin{center}
+  \setlength{\unitlength}{0.012500in}%
+  \includegraphics[width=17cm, height=5cm]{Images/errors.eps}
+  \end{center}
+  \caption{Errors between the mean samples for individual surfaces using M4 and PM, using propeller size R = 0.1143 m, dashed line is M4 and solid line is PM}
+  \label{rxsx_ind_kb}
+\end{figure*}
+
+\begin{table}
+  \small\sf\centering
+  \caption{comparison between modelling errors of M4 and PM for different surface types and propeller radii.}
+  \scalebox{1.0}{
+  \begin{tabular}{c c c c}
+    & & &\\ % put some space after the caption
+    \hline
+    Surface type, radius  & error M4  & error PM  &$\eta$ (\%)\\
+    \hline
+    Turf, R1              & 0.004585  & 0.004492  &  2.02\\
+    Dirt, R1              & 0.007250  & 0.003130  & \textbf{56.82}\\
+    Irregular Soil, R1    & 0.005870  & 0.005153  & 12.21\\
+    Dry Soil, R1          & 0.008313  & 0.006831  & 17.82\\
+    Turf, R2              & 0.009234  & 0.007046  & \textbf{23.69}\\
+    Dirt, R2              & 0.006337  & 0.005968  &  5.82\\
+    Irregular Soil, R2    & 0.003175  & 0.003226  &  1.60\\
+    Dry Soil, R2          & 0.003521  & 0.003007  & 14.59\\
+    Turf, R3              & 0.009845  & 0.009488  &  3.62\\
+    Dirt, R3              & 0.006478  & 0.006329  &  2.30\\
+    Irregular Soil, R3    & 0.006355  & 0.005815  &  8.49\\
+    Dry Soil, R3          & 0.005729  & 0.004846  & 15.41\\
+    \hline
+  \end{tabular}}
+  \label{props_surface_PM_errors}
+\end{table}
+
+\section{Altitude Control with Ground Effect Compensation} \label{exp_resutls}
+The main advantages of quadrotors are their capability of hovering and vertical takeoff and landing. In order to perform these special maneuvers, the altitude control algorithm plays a crucial role. Several control algorithms have been proposed in the literature, from linear to non-linear schemes, \cite{Wicaksono2017, Abci2017, Carrillo2012, Lee2012}.
+
+In this study, to keep the focus on ground effect, altitude controller is selected as a PD controller, the derivation and the performance of this controller can be found in \cite{DenaRuiz2017}. This control technique was chosen due to its fast response in providing adequate performance and the ease in its parameter tuning. Fig. \ref{altitudevs_error} shows the performance of the controller scheme presented in Fig. \ref{pd_ge_comp} in its standard form without any ground effect compensation. During the experiments, the UAV is kept hovering at each height for approximately 4 seconds. It is assumed that this period is long enough to acquire sufficient samples to measure the steady state error due to ground effect.
+
+\begin{figure}[t]
+  \begin{center}
+  \setlength{\unitlength}{0.012500in}%
+  \includegraphics[width=8.5cm, height=4.8cm]{Images/control_block_diag.png}
+  \end{center}
+  \caption{Block diagram for PD altitude control with ground effect disturbance}
+  \label{pd_ge_comp}
+\end{figure}
+
+\begin{figure}[t]
+  \begin{center}
+  \setlength{\unitlength}{0.012500in}%
+  \includegraphics[width=8.5cm,height=7.5cm]{Images/alt_ref_error_subplot.png}
+  \end{center}
+  \caption{On the top plot, the comparison between desired and actual altitude, in the bottom the error propagation, using R=0.1143, dry soil as surface type and uncompensated controller}
+  \label{altitudevs_error}
+\end{figure}
+
+As shown in Fig. \ref{altitudevs_error}, as the quadrotor gets closer to the surface, the error becomes larger due to the increasing ground effect. In order to compensate the ground effect in the altitude controller, the control scheme given in Fig. \ref{ge_comp_block} is proposed. The compensated altitude control becomes:
+
+\begin{align}
+  U_{1} &= \frac{m(g+r_{1})}{\cos\phi\cos\theta T_{IGE}(z,R)} \\
+  r_{1} &= e(t)K_{p} + \dot{e(t)}K_{d} 
+\end{align}
+
+\noindent where $U_{1}$ is the control law, $T_{IGE}(z,R)$ is the ground effect estimated according to PM in Eqn.\eqref{sanchez-cuevas_3}, $e(t)$ is the error between the desired and the measured altitudes, and $\dot{e(t)}$ is its derivative. $K_{p}$ and $K_{d}$ are the same gains for the uncompensated altitude controller.
+
+The altitude tracking performance of the quadrotor under the control with ground effect compensation is presented in Fig. \ref{altitudevs_error_comp}. It is observed that the average error reduces from 0.04 m  to 0.01 m after enhancing the controller with  the ground effect compensator.
+
+\begin{figure}[t]
+  \begin{center}
+  \setlength{\unitlength}{0.012500in}%
+  \includegraphics[width=8.5cm, height=4.7cm]{Images/control_block_diag_2.png}
+  \end{center}
+  \caption{Block diagram of the ground effect compensation and PD controller}
+  \label{ge_comp_block}
+\end{figure}
+
+\begin{figure}[t]
+  \begin{center}
+  \setlength{\unitlength}{0.012500in}%
+  \includegraphics[width=8.5cm,height=7.5cm]{Images/alt_ref_error_subplot_comp.png}
+  \end{center}
+  \caption{On the top plot, the comparison between desired altitudes and real altitude, in the bottom the error propagation, using R=0.1143, dry soil as surface type and compensated controller}
+  \label{altitudevs_error_comp}
+\end{figure}
+
+\begin{table*}
+  \small\sf\centering
+  \caption{Comparison of the average altitude tracking errors of the uncompensated controller and the compensated controllers with M4 and PM, using R=0.1143 and dry soil surface.}
+  \scalebox{1.0}{
+  \begin{tabular}{c c c c c c c}
+    & & & & & & \\
+  \hline
+  Altitude (m)  & Ground effect & Ground effect   & Ground effect   & error reduction & error reduction & Improvement\\
+                & uncompensated & M4 compensation & PM compensation & with M4 (\%)    & with PM (\%)    & (\%)\\
+  \hline
+  % 1	&	0.019304	&	0.007129	&	0.006743	&	63.07	&	65.07	&	3.07	\\
+  % 0.9	&	0.026140	&	0.012329	&	0.012287	&	52.83	&	53.00	&	0.30	\\
+  % 0.8	&	0.019350	&	0.024259	&	0.012942	&	-25.37	&	33.12	&	176.61	\\
+  % 0.7	&	0.021442	&	0.018515	&	0.020878	&	13.65	&	2.63	&	-418.97	\\
+  0.6	&	0.036083	&	0.018497	&	0.013491	&	48.74	&	62.61	&	22.16	\\
+  0.55	&	0.039116	&	0.017771	&	0.008184	&	54.57	&	79.08	&	30.99	\\
+  0.5	&	0.028527	&	0.025653	&	0.008860	&	10.07	&	68.94	&	85.39	\\
+  0.45	&	0.035475	&	0.026625	&	0.010642	&	24.95	&	70.00	&	64.36	\\
+  0.4	&	0.039832	&	0.022962	&	0.015047	&	42.35	&	62.22	&	31.93	\\
+  0.35	&	0.042411	&	0.026709	&	0.010482	&	37.02	&	75.28	&	50.82	\\
+  0.3	&	0.050142	&	0.029199	&	0.009656	&	41.77	&	80.74	&	48.27	\\
+  0.25	&	0.064253	&	0.022175	&	0.005513	&	65.49	&	91.42	&	28.37	\\
+  0.21	&	0.057480	&	0.025615	&	0.008008	&	55.44	&	86.07	&	35.59	\\
+  \hline
+  \end{tabular}}
+  \label{ctrl_comp_m4_pm}
+\end{table*}
+
+Table \ref{ctrl_comp_m4_pm} shows the reduction in altitude tracking error with the controller including ground effect compensation using models M4 and PM, for R=0.1143 and dry soil surface, starting at 0.6m altitude, where the difference in ground effect is observed to be significant. A similar analysis is made for different propeller radii and surface types, and they follow the same pattern as Table \ref{ctrl_comp_m4_pm}. First thing to note is that ground effect compensation decreases altitude tracking error up to 65\% with M4 and dramatically up to 91\% with PM. The last column in Table \ref{ctrl_comp_m4_pm} shows the improvement in error reduction obtained with ground effect compensation based on PM compared to M4. The achieved results strongly indicate that PM models ground effect accurately compared to M4 which is the most elaborated model available in the literature. 
+
+\begin{figure}[t]
+  \begin{center}
+  \setlength{\unitlength}{0.012500in}%
+  \includegraphics[width=8.5cm,height=6cm]{Images/effort_comp.png}
+ \end{center}
+  \caption{Control effort comparison between the uncompensated and compensated controllers}
+  \label{effort_comp}
+\end{figure}
+
+Figure \ref{effort_comp}, depicts the control effort required by the uncompensated controller and those compensated with M4 and PM for keep hovering at different altitudes. As can be seen, the uncompensated controller generates greater controller effort as a trend with the decreasing altitude. On the other hand, for the compensated controllers, the control effort is reduced by approximately 60\% from the uncompensated controller. Furthermore, it is observed that controller with compensation based on PM necessitates almost half of the controller effort of the one based on M4. This reduction is considered as another verification of the increase in modeling accuracy achieved by the proposed surface-type ground effect model.
+
 \section{Conclusions}
-The only way to ensure that your figures are presented in the ASME Journal of Mechanical Design in the way you feel is appropriate and meets the requirement for quality presentation is for you to prepare a double column version of the paper in a form similar to that used by the Journal.
+In this paper, an analysis of the ground effect is performed, and its dependency on propeller size and surface type is  newly investigated. Three different sizes of propeller were used in the experiments above 4 different surface types. The results conclude that a quadrotor flying in a proximity of a ground surface will experience an aerodynamic force known as the ground effect, and this force depends on the size of the propeller, the distance between the propeller and the ground, and also the surface type beneath. To the knowledge of the authors, the surface type dependent ground effect modelling is novel.
 
-This gives you the opportunity to ensure that the figures are sized appropriately, in particular that the labels are readable and match the size of the text in the journal, and that the line weights and resolutions have no pixilation or rasterization.  Poor quality figures are immediately obvious on the printed page, and this detracts from the perceived quality of the journal.
+In this paper, a surface type dependant ground effect model is proposed. This model is adapting the most advanced ground effect model available in the literature, \cite{Sanchez-Cuevas2017}. It is observed that with this model, an adequate modeling accuracy cannot be achieved for all surface types. Therefore this model is extended to include surface type dependency as given in Eqn.\eqref{sanchez-cuevas_3}, and in terms of modelling error, an average of 14\% of improvement is achieved with the proposed model in the experiments conducted over different surface types. As a validation step, ground effect compensated altitude controllers are designed, altitude tracking errors and controller efforts are compared. The results depicted a 20-80\% improvement in altitude errors and a 50\% reduction in control effort with the proposed model compared to the reference model.
 
-I am pleased to provide advice on how to improve any figure, but this effort must start with a two-column version of the manuscript. Thank you in advance for your patience with this effort, it will ensure quality presentation of your research contributions.
-
-
-
+In this paper, the irregular surface with dry soil is obtained by creating little bumps of 3 cm height and with a separation of 5 cm between them. As a future work, the irregularities on the surface and its impact on the ground effect can be analysed for different irregularities.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Discussions}
-This template is not yet ASME journal paper format compliant at this point.
-More specifically, the following features are not ASME format compliant.
-\begin{enumerate}
-\item
-The format for the title, author, and abstract in the cover page.
-\item
-The font for title should be 24 pt Helvetica bold.
-\end{enumerate}
+% \section{Discussions}
+% This template is not yet ASME journal paper format compliant at this point.
+% More specifically, the following features are not ASME format compliant.
+% \begin{enumerate}
+% \item
+% The format for the title, author, and abstract in the cover page.
+% \item
+% The font for title should be 24 pt Helvetica bold.
+% \end{enumerate}
 
-\noindent
-If you can help to fix these problems, please send us an updated template.
-If you know there is any other non-compliant item, please let us know.
-We will add it to the above list.
-With your help, we shall make this template 
-compliant to the ASME journal paper format.
+% \noindent
+% If you can help to fix these problems, please send us an updated template.
+% If you know there is any other non-compliant item, please let us know.
+% We will add it to the above list.
+% With your help, we shall make this template 
+% compliant to the ASME journal paper format.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{acknowledgment}
-ASME Technical Publications provided the format specifications for the Journal of Mechanical Design, though they are not easy to reproduce.  It is their commitment to ensuring quality figures in every issue of JMD that motivates this effort to have authors review the presentation of their figures.  
-
-Thanks go to D. E. Knuth and L. Lamport for developing the wonderful word processing software packages \TeX\ and \LaTeX. We would like to thank Ken Sprott, Kirk van Katwyk, and Matt Campbell for fixing bugs in the ASME style file \verb+asme2ej.cls+, and Geoff Shiflett for creating 
-ASME bibliography stype file \verb+asmems4.bst+.
+    This study is conducted in a Ph.D. project, funded by the Mexican Consejo Nacional de Ciencia y Tecnología (CONACyT) and Cranfield University.
 \end{acknowledgment}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -356,17 +576,17 @@ ASME bibliography stype file \verb+asmems4.bst+.
 \bibliography{asme2e}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\appendix       %%% starting appendix
-\section*{Appendix A: Head of First Appendix}
-Avoid Appendices if possible.
+% \appendix       %%% starting appendix
+% \section*{Appendix A: Head of First Appendix}
+% Avoid Appendices if possible.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section*{Appendix B: Head of Second Appendix}
-\subsection*{Subsection head in appendix}
-The equation counter is not reset in an appendix and the numbers will
-follow one continual sequence from the beginning of the article to the very end as shown in the following example.
-\begin{equation}
-a = b + c.
-\end{equation}
+% \section*{Appendix B: Head of Second Appendix}
+% \subsection*{Subsection head in appendix}
+% The equation counter is not reset in an appendix and the numbers will
+% follow one continual sequence from the beginning of the article to the very end as shown in the following example.
+% \begin{equation}
+% a = b + c.
+% \end{equation}
 
 \end{document}
